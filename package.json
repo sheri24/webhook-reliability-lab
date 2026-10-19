@@ -1,0 +1,22 @@
+{
+  "name": "webhook-reliability-lab",
+  "private": true,
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:migrate": "node apps/api/scripts/migrate.mjs",
+    "verify:e2e": "node apps/api/scripts/verify-e2e.mjs",
+    "dev:api": "tsx watch --tsconfig apps/api/tsconfig.json apps/api/src/main.ts",
+    "dev:worker": "tsx watch --tsconfig apps/api/tsconfig.json apps/api/src/worker.ts",
+    "worker": "tsx --tsconfig apps/api/tsconfig.json apps/api/src/worker.ts",
+    "dev:web": "vite apps/web --config apps/web/vite.config.ts",
+    "build": "tsc --project apps/api/tsconfig.json --noEmit && tsc --project apps/web/tsconfig.json --noEmit && vite build apps/web --config apps/web/vite.config.ts"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  }
+}

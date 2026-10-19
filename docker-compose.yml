@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${WEBHOOK_LAB_POSTGRES_DB:-webhook_lab}
+      POSTGRES_USER: ${WEBHOOK_LAB_POSTGRES_USER:-webhook_lab}
+      POSTGRES_PASSWORD: ${WEBHOOK_LAB_POSTGRES_PASSWORD:-webhook_lab_dev}
+    ports:
+      - "${WEBHOOK_LAB_POSTGRES_HOST_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${WEBHOOK_LAB_POSTGRES_USER:-webhook_lab} -d ${WEBHOOK_LAB_POSTGRES_DB:-webhook_lab}"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  postgres_data:

@@ -1,0 +1,24 @@
+# Local credentials and configuration. Keep only the safe template in Git.
+.env
+.env.*
+!.env.example
+
+# Dependencies, generated output, and logs.
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+coverage/
+*.log
+
+# Operating system and editor files.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Local Codex/content planning files; keep these in the working copy only.
+/AGENTS.md
+/PROJECT_PLAN.md
+/LinkedIn_Engineering_Content_Strategy_for_Codex.docx
